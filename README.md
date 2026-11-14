@@ -8,7 +8,37 @@
 
 ## 系统结构
 
-![系统结构](docs/architecture.svg)
+```mermaid
+flowchart TB
+    subgraph DEV["现场设备"]
+        D1["摄像头 RTSP 视频流"]
+        D2["环境传感器"]
+        D3["塔吊 · 升降机"]
+    end
+
+    subgraph L2["服务层"]
+        CV["ai-safety-service<br/>Python · YOLO 目标检测"]
+        BE["Spring Boot backend<br/>设备台账 · 告警状态机 · WebSocket"]
+        AG["agent<br/>自然语言问答"]
+    end
+
+    subgraph L3["数据层"]
+        MY[("MySQL<br/>设备 · 告警 · AI 截图 · 传感器记录")]
+    end
+
+    subgraph L1["展示层"]
+        FE["Vue 3 + Three.js<br/>数据大屏 · 实时监控 · 告警 · 3D 场景"]
+    end
+
+    D1 --> CV
+    D2 --> BE
+    D3 --> BE
+    CV -->|截图与置信度| BE
+    BE <-->|工具调用| AG
+    BE --> MY
+    BE <-->|REST / WebSocket| FE
+```
+
 
 ## 目录结构
 
