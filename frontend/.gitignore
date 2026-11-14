@@ -1,0 +1,239 @@
+# ==================== 依赖 ====================
+node_modules
+.pnpm-store
+
+# ==================== 构建产物 ====================
+dist
+dist-ssr
+*.local
+
+# Mock 数据（仅本地调试用）
+mock
+
+# Vite 编译缓存
+.vite
+.cache
+
+# Tailwind CSS 缓存
+.tailwindcss
+
+# PostCSS 缓存
+.postcssrc.cache
+
+# TypeScript
+*.tsbuildinfo
+*.tsbuildinfo.*
+
+# ==================== 环境变量 ====================
+# 环境变量模板
+.env.development
+.env.production
+
+# 本地环境变量（含敏感信息，必须忽略）
+.env.local
+.env.*.local
+.env.test
+
+# ==================== 包管理器 ====================
+# yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.yarn/install-state.gz
+
+# pnpm
+pnpm-lock.yaml
+
+# bun
+bun.lockb
+
+# ==================== 日志 ====================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 运行时日志
+*.pid
+*.seed
+*.pid.lock
+
+# ==================== 编辑器 & IDE ====================
+# AI 助手
+.codebuddy
+
+# VSCode
+.vscode
+.vscode/*
+.vscode/extensions.json
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode-server
+
+# JetBrains
+.idea
+*.iml
+.gradle
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+*.un~
+Session.vim
+Sessionx.vim
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# Eclipse / Spring Tool Suite
+.project
+.classpath
+.settings/
+.springBeans
+
+# NetBeans
+nbproject/
+nbbuild/
+dist/
+nbdist/
+
+# Visual Studio
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vs
+
+# ==================== 操作系统 ====================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ==================== 测试 & 覆盖率 ====================
+coverage
+coverage-*
+*.lcov
+.nyc_output
+.junit
+
+# Cypress
+cypress/screenshots
+cypress/videos
+cypress/downloads
+
+# Playwright
+playwright-report
+test-results
+
+# Vitest
+__s napshots__
+
+# ==================== 临时文件 ====================
+*.tmp
+*.temp
+*.bak
+*.swp
+*.orig
+*.patch
+tmp
+temp
+
+# 压缩包
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# ==================== 密钥 & 证书 ====================
+*.pem
+*.p12
+*.pfx
+*.key
+*.crt
+*.csr
+*.cer
+ssl/
+certs/
+
+# ==================== Storybook ====================
+storybook-static
+
+# ==================== 其他 ====================
+# ESLint 缓存
+.eslintcache
+.eslintcache.*
+
+# Prettier 缓存
+.prettiercache
+
+# Stylelint 缓存
+.stylelintcache
+
+# Vite 的 PWA 自动生成文件
+dev-dist
+
+# 开发时本地数据
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# 性能分析
+*.cpuprofile
+*.heapprofile
+*.heapsnapshot
