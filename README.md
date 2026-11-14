@@ -119,3 +119,7 @@ python app.py
 - 后端：Java 17、Spring Boot 3.0、MyBatis、MySQL、Redis、JWT
 - 前端：Vue 3、Vite、Pinia、Element Plus、ECharts、Three.js
 - AI：Python、YOLO、向量检索
+
+---
+
+本项目为团队协作开发，此仓库为个人整理版本，用于作品展示。
