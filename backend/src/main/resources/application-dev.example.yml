@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:mysql://47.109.141.71:3306/smartbuilding?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: SmartBuilding
+    password: 请填写
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10          # 开发环境连接池小一些
+
+  data:
+    redis:
+      # 需要建立ssh隧道转发到远程服务器
+      host: localhost
+      port: 6379
+      password: 请填写
+
+  jpa:
+    hibernate:
+      ddl-auto: update               # 开发环境允许自动建表
+    show-sql: true
+
+logging:
+  level:
+    com.example.myapp: DEBUG         # 开发环境开 DEBUG
+    org.springframework.web: DEBUG
+
+# ========== 自定义配置 ==========
+auth:
+  enabled: false # 默认打开拦截器，开发环境自行关闭

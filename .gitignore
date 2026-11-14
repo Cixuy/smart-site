@@ -1,0 +1,31 @@
+# 依赖与构建产物
+node_modules/
+dist/
+target/
+*.class
+.venv/
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# 本地配置，含真实密钥，不要提交
+**/application-dev.yml
+**/application-dev.yaml
+.env
+.env.local
+!**/.env.example
+!**/application-dev.example.yml
+
+# 运行数据
+chroma/
+logs/
+*.log
+
+# 模型与演示视频体积较大，不入库
+*.pt
+*.glb
+*.mp4

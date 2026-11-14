@@ -1,0 +1,63 @@
+# ========== Spring核心配置 ==========
+spring:
+  profiles:
+    active: dev
+  application:
+    name: my-service
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    default-property-inclusion: non_null
+  servlet:
+    multipart:
+          max-file-size: 10MB
+          max-request-size: 50MB
+
+# ========== 服务器 ==========
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+  tomcat:
+    threads:
+      max: 200
+    uri-encoding: UTF-8
+
+# ========== 日志 ==========
+logging:
+  level:
+    root: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# ========== Swagger接口文档 ==========
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+
+# ========== 自定义配置 ==========
+auth:
+  # Local development runs without the Redis SSH tunnel. Deployments must set
+  # AUTH_ENABLED=true so authenticated endpoints remain protected.
+  enabled: ${AUTH_ENABLED:false}
+
+# 设备3D模型存储目录（模型文件按 device-models/{projectId}/{sceneId}/{iconType}/{deviceCode}.glb 存放）
+# 留空 = 开发默认 src/main/resources/device-models；生产环境打包为 jar 后该路径不可写，
+# 须指定外部绝对目录（如 /data/smartbuilding/device-models），否则模型静态访问 /device-models/** 返回 404。
+app:
+  model-storage-dir:
+  # AI 截图存储根目录：AI 检测服务写入 + 后端 /ai_image/** 静态访问 + 截图删除接口定位文件均使用
+  # 缺省为 {user.dir}/ai_image；本机统一存放到 build-sec 根目录便于前后端共享查看
+  ai-image-dir: ai_image
+
+# ========== 传感器 TCP 实时通道 ==========
+sensor:
+  tcp:
+    port: ${SENSOR_TCP_PORT:9090}
+    cache-capacity: ${SENSOR_TCP_CACHE_CAPACITY:100}
