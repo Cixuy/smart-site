@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>摄像头模拟器 - 直播画面</title>
+  <script src="/vendor/flv.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      background: #0f1115; color: #e8e8e8;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 24px 16px;
+    }
+    h1 { font-size: 20px; font-weight: 600; margin: 0 0 16px; letter-spacing: 1px; }
+    h1 .dot { color: #ff5252; }
+    .stage {
+      width: min(960px, 100%);
+      background: #000; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, .55);
+    }
+    video { width: 100%; display: block; aspect-ratio: 16/9; background: #000; }
+    .bar {
+      width: min(960px, 100%); margin-top: 16px;
+      display: flex; gap: 10px;
+    }
+    input {
+      flex: 1; padding: 10px 14px; border-radius: 8px;
+      border: 1px solid #2a2f3a; background: #171a21; color: #eee;
+      font-size: 14px; outline: none;
+    }
+    input:focus { border-color: #4f8cff; }
+    button {
+      padding: 10px 22px; border: none; border-radius: 8px;
+      background: #4f8cff; color: #fff; font-size: 14px; cursor: pointer;
+    }
+    button:hover { background: #3d76e8; }
+    #status {
+      margin-top: 12px; font-size: 13px; color: #9aa4b2;
+      word-break: break-all; text-align: center; max-width: 960px;
+    }
+    #status.err { color: #ff6b6b; }
+  </style>
+</head>
+<body>
+  <h1><span class="dot">●</span> 摄像头模拟器</h1>
+  <div class="stage">
+    <video id="player" controls autoplay muted playsinline></video>
+  </div>
+  <div class="bar">
+    <input id="stream" placeholder="流名称，例如 cam1" />
+    <button id="play">播放</button>
+  </div>
+  <div id="status"></div>
+
+  <script>
+    const video = document.getElementById('player');
+    const input = document.getElementById('stream');
+    const statusEl = document.getElementById('status');
+    let player = null;
+
+    function status(msg, isErr) {
+      statusEl.textContent = msg;
+      statusEl.className = isErr ? 'err' : '';
+    }
+
+    function play(name) {
+      const stream = (name || '').trim() || 'cam1';
+      const url = location.protocol + '//' + location.host + '/live/' + stream + '.flv';
+
+      if (player) { player.destroy(); player = null; }
+
+      if (!window.flvjs || !flvjs.isSupported()) {
+        status('当前浏览器不支持 flv.js，请改用 VLC / ffplay 播放该 HTTP-FLV 地址', true);
+        return;
+      }
+
+      player = flvjs.createPlayer({ type: 'flv', url, isLive: true, hasAudio: true });
+      player.on(flvjs.Events.ERROR, (type, detail) => {
+        status('播放出错: ' + type + ' ' + detail, true);
+      });
+      player.attachMediaElement(video);
+      player.load();
+      player.play().catch(() => {});
+      status('播放中: ' + url);
+    }
+
+    document.getElementById('play').addEventListener('click', () => play(input.value));
+
+    const params = new URLSearchParams(location.search);
+    const stream = params.get('stream');
+    if (stream) {
+      input.value = stream;
+      play(stream);
+    } else {
+      input.value = 'cam1';
+      status('输入流名称后点击播放，例如 http://本机:8000/?stream=cam1');
+    }
+  </script>
+</body>
+</html>

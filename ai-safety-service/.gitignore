@@ -1,0 +1,53 @@
+# ===== 虚拟环境 =====
+.venv/
+venv/
+env/
+
+# ===== Python =====
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# ===== 数据集（78MB zip + 717 张图片，不入库）=====
+datasets/
+*.zip
+
+# ===== 训练输出 =====
+runs/
+*.out.log
+*.err.log
+inspect_out.log
+inspect_err.log
+prep_out.log
+prep_err.log
+
+# ===== 预训练权重 / 部署产物 =====
+yolo11s.pt
+*.pt
+*.onnx
+*.torchscript
+*.engine
+*.part
+
+# ===== 生成的图表（可由 inspect_dataset.py 重新生成）=====
+assets/
+
+# ===== IDE / 系统 =====
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ===== 监测服务运行时产物 =====
+screenshots/
+pending_alerts/
+*.mp4
+*.avi
+
+# 说明：
+# configs/*.yaml 为摄像头配置示例，保留入库；生产摄像头配置含真实凭据，
+# 建议在服务器上另行维护（如将真实配置放入 gitignore 的 configs/private/ 下）。
+
+# ===== 配置说明 =====
+# data_final.yaml / prepare_data.py 等源码与配置保留入库

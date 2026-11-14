@@ -1,0 +1,3 @@
+# 本目录存放部署推理用的 .pt 模型文件（如 construction_safety_v1.pt），
+# 文件较大不入库，请将训练好的权重复制到此处（.gitignore 已忽略 *.pt）。
+# 缺省模型路径：models/construction_safety_v1.pt（可通过环境变量 AI_MODEL_PATH 修改）。

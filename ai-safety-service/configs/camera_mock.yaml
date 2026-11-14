@@ -1,0 +1,62 @@
+# =====================================================================
+# 摄像头监测配置：CAM_MOCK（本地模拟摄像头，vedio_mock 推流）
+# 对应推流地址：rtmp://127.0.0.1:1935/live/cam1
+# 也可改用 HTTP-FLV：http://127.0.0.1:8000/live/cam1.flv
+# 放置于 configs/ 目录下，服务启动时自动读取 configs/*.yaml 并全部启动。
+# =====================================================================
+
+camera_id: "CAM_MOCK"
+camera_name: "模拟摄像头-vedio_mock"
+rtsp_url: "rtmp://127.0.0.1:1935/live/cam1"
+location_name: "本地测试环境"
+
+# 模型与检测参数（model_path 缺省时使用全局配置 models/construction_safety_v1.pt）
+model_path: "models/construction_safety_v1.pt"
+detect_interval: 3          # 每 3 帧检测一次（约每秒 8~10 次）
+conf_threshold: 0.25        # 置信度阈值
+iou_threshold: 0.45         # NMS IoU 阈值
+cooldown_seconds: 15        # 同类违规防抖冷却（秒）：冷却期内同类型最多触发一次
+debounce_mode: "global"     # 防抖模式: global=同类型全局冷却(防刷屏,推荐) / grid=位置网格(x,y各50px)
+# debounce_grid_x: 50       # grid 模式网格（x 方向像素）
+# debounce_grid_y: 50       # grid 模式网格（y 方向像素）
+
+# 截图目录与 HTTP 访问基础 URL
+# screenshot_dir 支持绝对路径（优先）或相对路径（基于全局截图根目录 screenshots/）
+# 截图统一存放到 build-sec 根目录的 ai_image 下，后端通过 /api/ai_image/** 静态访问
+screenshot_dir: "F:/summer_practice/build-sec/ai_image/CAM_MOCK"
+screenshot_base_url: "http://127.0.0.1:8080/api/ai_image/CAM_MOCK"
+
+# ---- 后端对接（真实 Spring Boot，context-path=/api，端口 8080）----
+# 告警接收地址：POST /api/alarms，成功响应 {"code":0,"msg":"success","data":{"id":N}}
+java_endpoint: "http://127.0.0.1:8080/api/alarms"
+
+# 后端项目主键 projectId（AlarmCreateDTO 必填，对应后端 biz_project 表）
+project_id: 1
+# 后端摄像头主键 cameraId（Long，对应后端 biz_camera 表；不填则不关联摄像头）
+backend_camera_id: 1
+# device_id: 1           # 可选：后端设备主键
+# monitor_point_id: 1    # 可选：后端监测点位主键
+threshold_range: "conf>=0.25"
+
+# 后端鉴权（后端 auth.enabled=true 时需开启；开启后 AI 服务自动调登录接口拿 token）
+backend_auth_enabled: false
+backend_username: ""
+backend_password: ""
+# login_endpoint: "http://127.0.0.1:8080/api/auth/login"   # 缺省由 java_endpoint 自动推导
+
+# 告警推送成功后，将截图地址关联到后端告警记录（POST /api/ai/alarms/{id}/screenshot）
+# {alarm_id} 为占位符，由服务替换为后端返回的告警 ID；留空则不关联
+screenshot_endpoint: "http://127.0.0.1:8080/api/ai/alarms/{alarm_id}/screenshot"
+
+# 启用的违规类别（模型类别子集）；空列表表示全部类别
+enabled_classes:
+  - "NO-Hardhat"
+  - "NO-Safety Vest"
+  - "smoking"
+
+# ROI 多边形（可选，null 表示不过滤；只检测中心点落在多边形内的目标）
+roi_polygon: null
+
+# 重连参数（可选，缺省用全局配置：10 次、3 秒间隔）
+# max_reconnect: 10
+# reconnect_delay: 3
