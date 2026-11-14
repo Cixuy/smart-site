@@ -6,6 +6,28 @@
 
 > 模型文件与演示视频体积较大，未纳入仓库，本地运行需要自行准备。
 
+## 界面预览
+
+<p>
+  <img src="docs/screenshots/dashboard.png" width="49%">
+  <img src="docs/screenshots/tower-crane.png" width="49%">
+</p>
+<p>
+  <img src="docs/screenshots/tower-curve.png" width="49%">
+  <img src="docs/screenshots/alarm-list.png" width="49%">
+</p>
+<p>
+  <img src="docs/screenshots/device-list.png" width="49%">
+  <img src="docs/screenshots/scene-3d.png" width="49%">
+</p>
+
+<details>
+<summary>登录页</summary>
+
+<img src="docs/screenshots/login.png" width="80%">
+
+</details>
+
 ## 系统结构
 
 ```mermaid
