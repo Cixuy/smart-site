@@ -9,7 +9,7 @@ verify_env.py — YOLO11 训练环境健康检查脚本
     3. 检查关键依赖包版本 (torch / torchvision / ultralytics / opencv-python /
        pyyaml / numpy / matplotlib / roboflow)
     4. 加载 yolo11s.pt 并对随机 Tensor 执行 GPU 推理，验证推理链路
-    5. 输出带 ✅/❌ 标记的环境健康报告；存在关键项失败时以非 0 退出码结束
+    5. 输出带 [OK]/[FAIL] 标记的环境健康报告；存在关键项失败时以非 0 退出码结束
 
 用法:
     python verify_env.py
@@ -21,7 +21,7 @@ import subprocess
 import sys
 import time
 
-# Windows 控制台默认 GBK 编码，强制 stdout/stderr 使用 UTF-8，避免 ✅/❌ 等
+# Windows 控制台默认 GBK 编码，强制 stdout/stderr 使用 UTF-8，避免 [OK]/[FAIL] 等
 # 字符触发 UnicodeEncodeError；Linux 下 reconfigure 亦无害。
 for _stream in (sys.stdout, sys.stderr):
     try:

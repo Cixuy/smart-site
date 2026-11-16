@@ -230,7 +230,7 @@ const actions = {
       console.log('[getUserInfo] 响应 keys:', Object.keys(data))
       const hasMenuTree = Array.isArray(data.menuTree) && data.menuTree.length > 0
       if (!hasMenuTree) {
-        console.warn('[getUserInfo] ⚠️ 响应中无 menuTree 或为空，侧边栏将只显示首页')
+        console.warn('[getUserInfo] [注意] 响应中无 menuTree 或为空，侧边栏将只显示首页')
       }
     }
 

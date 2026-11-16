@@ -277,13 +277,13 @@ def quality_check(cfg: dict, data_root: Path, names: list, nc: int):
         items = PROBLEMS[key]
         if items:
             all_ok = False
-            print(f"    [❌] {title}: {len(items)} 处")
+            print(f"    [[FAIL]] {title}: {len(items)} 处")
             for it in items[:5]:
                 print(f"         - {it}")
             if len(items) > 5:
                 print(f"         ... 其余 {len(items) - 5} 处省略")
         else:
-            print(f"    [✅] {title}: 0 处")
+            print(f"    [[OK]] {title}: 0 处")
     return all_ok
 
 

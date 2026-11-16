@@ -104,7 +104,7 @@ public class VideoMonitoringController {
         return Result.ok(videoMonitoringService.deleteAiSnapshotById(id, deleteFile));
     }
 
-    @Operation(summary = "删除指定摄像头某天全部录像片段", description = "⚠️ 高危操作，需 confirm=true 二次确认，删除后不可恢复")
+    @Operation(summary = "删除指定摄像头某天全部录像片段", description = "[注意] 高危操作，需 confirm=true 二次确认，删除后不可恢复")
     @DeleteMapping("/video-records/timeline")
     public Result<DeleteTimelineResponseData> deleteTimeline(@Valid @RequestBody DeleteTimelineRequest request) {
         return Result.ok(videoMonitoringService.deleteTimeline(request));

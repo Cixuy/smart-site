@@ -545,7 +545,7 @@ public class SceneServiceImpl implements SceneService {
     /**
      * 临时桥接取视频流地址（3005 未合并 develop 前）。
      * 坐标 → device_coordinate_mapping.device_id(bigint) → asset_device.id → asset_device.device_code → biz_camera.device_id(varchar) → stream_url。
-     * ⚠️ 3005 合并后删除本方法，改用其 CameraMapper。
+     * [注意] 3005 合并后删除本方法，改用其 CameraMapper。
      */
     private String resolveCameraStreamUrl(Long coordinateId) {
         if (coordinateId == null) {
@@ -709,7 +709,7 @@ public class SceneServiceImpl implements SceneService {
             vo.setIsTransparent(isTransparent(o.getIsTransparent()));
             // 临时桥接取视频流：3005 摄像头模块未合并 develop，先用 SceneCameraReadMapper 只读 biz_camera。
             // device_id 是设备编码(String)，需经 device_coordinate_mapping.device_id(bigint) → asset_device → device_code 桥接。
-            // ⚠️ 3005 合并后删除本调用，改用其 CameraMapper / BizCamera 实体。
+            // [注意] 3005 合并后删除本调用，改用其 CameraMapper / BizCamera 实体。
             vo.setStreamUrl(resolveCameraStreamUrl(o.getCoordinateId()));
             vos.add(vo);
         }

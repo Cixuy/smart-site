@@ -37,7 +37,7 @@ ai-safety-service/
 | `setup_env.sh` | **Linux** 一键搭建脚本：检测/安装 Miniconda → 创建 `site-ai` 环境（Python 3.12）→ 安装 PyTorch（cu121）→ 安装 ultralytics 等依赖 → 自动验证 |
 | `setup_env.ps1` | **Windows** 一键搭建脚本：基于项目内 `.venv`（Python 3.12）完成同样安装流程 |
 | `requirements.txt` | 全部 Python 依赖清单（含注释与版本范围，Linux/Windows 通用） |
-| `scripts/verify_env.py` | 环境健康检查：CUDA/GPU/依赖版本/YOLO11s GPU 推理链路，输出 ✅/❌ 报告（跨平台） |
+| `scripts/verify_env.py` | 环境健康检查：CUDA/GPU/依赖版本/YOLO11s GPU 推理链路，输出 [OK]/[FAIL] 报告（跨平台） |
 | `README.md` | 本指南：从裸机到训练就绪的完整步骤与常见问题排查 |
 
 ---
@@ -59,7 +59,7 @@ cd f:\summer_practice\build-sec\ai-safety-service
 脚本完成后，后续每次使用先激活环境：
 ```powershell
 .\.venv\Scripts\Activate.ps1
-python scripts\verify_env.py  # 健康检查，输出 ✅/❌ 报告
+python scripts\verify_env.py  # 健康检查，输出 [OK]/[FAIL] 报告
 ```
 
 两阶段训练（推荐，一键依次执行）：
@@ -150,7 +150,7 @@ bash setup_env.sh
 conda activate site-ai
 python scripts/verify_env.py
 ```
-检查项：CUDA 可用性、GPU 型号与显存、nvidia-smi 驱动、各依赖版本、YOLO11s 推理链路。全部 ✅ 即可继续。
+检查项：CUDA 可用性、GPU 型号与显存、nvidia-smi 驱动、各依赖版本、YOLO11s 推理链路。全部 [OK] 即可继续。
 
 ### 步骤 4：准备数据集
 
